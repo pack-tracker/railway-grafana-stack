@@ -23,7 +23,6 @@ distributor:
           endpoint: "0.0.0.0:4318"
 
 overrides:
-  metrics_generator_processors: [span-metrics, local-blocks]
   defaults:
     ingestion:
       rate_limit_bytes: 20000000 # 20MB/s per user (higher than default 15MB)
@@ -31,6 +30,10 @@ overrides:
       max_traces_per_user: 20000 # Double the default of 10000
 
 metrics_generator:
+  processors:
+    - span-metrics
+    - local-blocks
+
   processor:
     span_metrics:
       dimensions:
