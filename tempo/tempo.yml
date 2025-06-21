@@ -23,6 +23,13 @@ distributor:
           endpoint: "0.0.0.0:4318"
 
 metrics_generator:
+  processors: [span-metrics, local-blocks]
+
+  # RED metrics → Prometheus
+  remote_write:
+    url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write # expands to http://prometheus.railway.internal:9090/api/v1/write
+    send_exemplars: true
+
   processor:
     span_metrics:
       dimensions:
@@ -30,5 +37,8 @@ metrics_generator:
         - http.status_code
         - http.route
         - service.name
+
+    local_blocks:
+      flush_to_storage: true
   storage:
     path: /var/tempo/metrics
