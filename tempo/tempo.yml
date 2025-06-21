@@ -24,7 +24,9 @@ distributor:
 
 overrides:
   defaults:
-    # Place default trace limits and other per-tenant config here if needed
+    ingestion_rate_limit_bytes: 5000000 # 5MB/s
+    ingestion_burst_size_bytes: 10000000 # 10MB burst
+    max_traces_per_user: 10000
 
 metrics_generator:
   processor:
