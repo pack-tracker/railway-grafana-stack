@@ -32,8 +32,6 @@ overrides:
     # Place default trace limits and other per-tenant config here if needed
 
 metrics_generator:
-  processors: [span-metrics, local-blocks]
-
   processor:
     span_metrics:
       dimensions:
@@ -48,6 +46,6 @@ metrics_generator:
   storage:
     path: /var/tempo/metrics
 
-  remote_write:
-    url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
-    send_exemplars: true
+    remote_write:
+      url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
+      send_exemplars: true
