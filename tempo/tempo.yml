@@ -60,12 +60,5 @@ metrics_generator:
           10.0,
         ]
       dimensions:
-        - name: http.method
-          operation: upsert
-        - name: http.status_code
-          operation: upsert
-        - name: http.route
-          operation: upsert
-        - name: service.name
-          operation: upsert
+        ["http.method", "http.status_code", "http.route", "service.name"]
       enable_target_info: true
