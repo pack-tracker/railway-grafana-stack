@@ -11,6 +11,11 @@ storage:
     local:
       path: /var/tempo/traces
 
+  metrics:
+    backend: local
+    local:
+      path: /var/tempo/metrics
+
 distributor:
   log_received_spans:
     enabled: true
@@ -22,13 +27,12 @@ distributor:
         http:
           endpoint: "0.0.0.0:4318"
 
+overrides:
+  defaults:
+    # Place default trace limits and other per-tenant config here if needed
+
 metrics_generator:
   processors: [span-metrics, local-blocks]
-
-  # RED metrics → Prometheus
-  remote_write:
-    url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write # expands to http://prometheus.railway.internal:9090/api/v1/write
-    send_exemplars: true
 
   processor:
     span_metrics:
@@ -40,5 +44,10 @@ metrics_generator:
 
     local_blocks:
       flush_to_storage: true
+
   storage:
     path: /var/tempo/metrics
+
+  remote_write:
+    url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
+    send_exemplars: true
