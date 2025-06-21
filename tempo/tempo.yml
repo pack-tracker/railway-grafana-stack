@@ -23,6 +23,7 @@ distributor:
           endpoint: "0.0.0.0:4318"
 
 overrides:
+  metrics_generator_processors: [span-metrics, local-blocks]
   defaults:
     ingestion:
       rate_limit_bytes: 20000000 # 20MB/s per user (higher than default 15MB)
@@ -44,7 +45,3 @@ metrics_generator:
 
   storage:
     path: /var/tempo/metrics
-
-    # remote_write:
-    #   - url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
-    #     send_exemplars: true
