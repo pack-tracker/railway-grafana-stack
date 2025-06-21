@@ -41,6 +41,6 @@ metrics_generator:
   storage:
     path: /var/tempo/metrics
 
-    remote_write:
-      - url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
-        send_exemplars: true
+    # remote_write:
+    #   - url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
+    #     send_exemplars: true
