@@ -11,11 +11,6 @@ storage:
     local:
       path: /var/tempo/traces
 
-  metrics:
-    backend: local
-    local:
-      path: /var/tempo/metrics
-
 distributor:
   log_received_spans:
     enabled: true
@@ -47,5 +42,5 @@ metrics_generator:
     path: /var/tempo/metrics
 
     remote_write:
-      url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
-      send_exemplars: true
+      - url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
+        send_exemplars: true
