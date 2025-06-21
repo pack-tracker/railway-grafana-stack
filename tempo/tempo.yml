@@ -23,42 +23,12 @@ distributor:
           endpoint: "0.0.0.0:4318"
 
 metrics_generator:
-  registry:
-    external_labels:
-      source: tempo
-      cluster: railway
-  storage:
-    path: /var/tempo/generator/wal
-    remote_write:
-      - url: ${PROMETHEUS_INTERNAL_URL}/api/v1/write
-        send_exemplars: true
-  traces_storage:
-    path: /var/tempo/generator/traces
   processor:
-    service_graphs:
-      histogram_buckets: [0.1, 0.2, 0.4, 0.8, 1.6, 3.2, 6.4, 12.8]
-      dimensions: ["http.method", "http.target"]
-      peer_attributes: ["db.name", "addr", "namespace"]
-      enable_client_server_prefix: true
     span_metrics:
-      histogram_buckets:
-        [
-          0.002,
-          0.005,
-          0.01,
-          0.025,
-          0.05,
-          0.075,
-          0.1,
-          0.25,
-          0.5,
-          0.75,
-          1.0,
-          2.5,
-          5.0,
-          7.5,
-          10.0,
-        ]
       dimensions:
-        ["http.method", "http.status_code", "http.route", "service.name"]
-      enable_target_info: true
+        - http.method
+        - http.status_code
+        - http.route
+        - service.name
+  storage:
+    path: /var/tempo/metrics
