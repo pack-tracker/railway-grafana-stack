@@ -28,9 +28,6 @@ overrides:
       processors: [local-blocks]
 
 metrics_generator:
-  ring:
-    kvstore:
-      store: memberlist
   processor:
     local_blocks:
       filter_server_spans: false
