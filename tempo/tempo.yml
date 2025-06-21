@@ -54,4 +54,4 @@ metrics_generator:
         send_exemplars: true
 
   traces_storage:
-    path: /var/tempo/traces
+    path: /var/tempo/generator/traces
