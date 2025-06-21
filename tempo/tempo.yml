@@ -23,7 +23,7 @@ distributor:
           endpoint: "0.0.0.0:4318"
 
 overrides:
-  defaults:
+  "*":
     ingestion_rate_limit_bytes: 5000000 # 5MB/s
     ingestion_burst_size_bytes: 10000000 # 10MB burst
     max_traces_per_user: 10000
