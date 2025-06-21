@@ -13,7 +13,7 @@ storage:
 
 distributor:
   log_received_spans:
-        enabled: true
+    enabled: true
   receivers:
     otlp:
       protocols:
@@ -21,3 +21,17 @@ distributor:
           endpoint: "0.0.0.0:4317"
         http:
           endpoint: "0.0.0.0:4318"
+
+overrides:
+  defaults:
+    metrics_generator:
+      processors: [local-blocks]
+
+metrics_generator:
+  ring:
+    kvstore:
+      store: memberlist
+  processor:
+    local_blocks:
+      filter_server_spans: false
+      flush_to_storage: true
